@@ -1,2 +1,2 @@
 def cucc():
-    print("csirkefarhat")
+    return "csirkefarhat"
