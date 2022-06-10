@@ -1,3 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Fri Jun 10 18:25:13 GMT 2022","Fri Jun 10 18:25:13 GMT 2022","0","","test_main","","","","test_cucc1",""
-"broken","Fri Jun 10 18:25:13 GMT 2022","Fri Jun 10 18:25:22 GMT 2022","9526","","test_main","","","","test_cucc2",""

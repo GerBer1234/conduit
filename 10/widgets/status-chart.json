@@ -1,1 +1,0 @@
-[{"uid":"21b7855917b88229","name":"test_cucc1","time":{"start":1654885513362,"stop":1654885513362,"duration":0},"status":"passed","severity":"normal"},{"uid":"a1be632f89226f4b","name":"test_cucc2","time":{"start":1654885513363,"stop":1654885522889,"duration":9526},"status":"broken","severity":"normal"}]
