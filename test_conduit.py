@@ -13,17 +13,24 @@ class TestConduit:
         URL = "http://localhost:1667/"
         self.browser.get(URL)
 
+        def teardown(self):
+            self.browser.quit()
+
     def test_registration(self):
         sign_in_btn = self.browser.find_element_by_xpath('.//a[@href="#/register"]')
         sign_in_btn.click()
         username = self.browser.find_element_by_xpath('.//input[@placeholder="Username"]')
-        username.send_keys('Béla')
+        username.send_keys('Béla bácsi')
         email = self.browser.find_element_by_xpath('.//input[@placeholder="Email"]')
-        email.send_keys('bela1@bela.com')
+        email.send_keys('bela@bela.com')
         pwd = self.browser.find_element_by_xpath('.//input[@placeholder="Password"]')
         pwd.send_keys('A123456a')
         sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         sign_up_btn.click()
         time.sleep(2)
         return_message = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
-        assert return_message.text == 'Registration failed!'
+        try:
+            assert return_message.text == 'Welcome!'
+        except AssertionError:
+            fail_msg = self.browser.find_element_by_xpath('.//div[@class="swal-text"]')
+            print(f'A regisztráció meghiúsult, mert {fail_msg.text}')
