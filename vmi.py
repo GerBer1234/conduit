@@ -1,2 +1,0 @@
-def cucc():
-    return "csirkefarhat"

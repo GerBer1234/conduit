@@ -1,5 +1,5 @@
 import pytest
-from vmi import cucc
+from main import cucc
 
 
 def test_cucc():
