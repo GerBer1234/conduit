@@ -38,4 +38,4 @@ class TestConduit:
             assert return_message.text == 'Welcome!'
         except AssertionError:
             fail_msg = self.browser.find_element_by_xpath('.//div[@class="swal-text"]')
-            print(f'A regisztráció meghiúsult! A hiba oka: {fail_msg.text}')
+            print(f'A regisztráció meghiúsult! A hiba oka: {fail_msg.text}!')
