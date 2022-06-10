@@ -3,11 +3,13 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
+
 class TestConduit:
     def setup(self):
         browser_options = Options()
         browser_options.headless = True
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
+        time.sleep(6)
         URL = "http://localhost:1667/"
         self.browser.get(URL)
 
