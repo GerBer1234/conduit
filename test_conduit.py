@@ -5,13 +5,14 @@ from selenium.webdriver.chrome.options import Options
 import user_data
 import random
 
+
 class TestConduit:
     def setup(self):
         # az Options osztály egy példányát hozzuk létre
         browser_options = Options()
         # a headless mód segítségével a felhasználói felület nélkül fut le a teszt
         browser_options.headless = True
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())#, options=browser_options)
+        self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         time.sleep(6)
         URL = "http://localhost:1667/"
         self.browser.get(URL)
