@@ -1,6 +1,6 @@
 import time
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class TestConduit:
@@ -20,3 +20,6 @@ class TestConduit:
         pwd.send_keys('A123456a')
         sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         sign_up_btn.click()
+        time.sleep(2)
+        return_message = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
+        assert return_message.text == 'Registration failed!'
