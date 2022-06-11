@@ -8,10 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 import user_data
 import random
 
-random_user = random.randint(0, len(user_data.users) - 1)
-username = user_data.users[random_user]['name']
-email = user_data.users[random_user]['email']
-password = user_data.users[random_user]['password']
+from important_functions import login
 
 
 class TestConduit:
@@ -21,22 +18,21 @@ class TestConduit:
         # a headless mód segítségével a felhasználói felület nélkül fut le a teszt
         browser_options.headless = True
         self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
-        time.sleep(6)
+        time.sleep(2)
         URL = "http://localhost:1667/"
         self.browser.get(URL)
-        time.sleep(6)
 
     def test_registration(self):
         sign_up_btn = self.browser.find_element_by_xpath('.//a[@href="#/register"]')
         sign_up_btn.click()
         username_input = self.browser.find_element_by_xpath('.//input[@placeholder="Username"]')
-        username_input.send_keys(username)
+        username_input.send_keys(user_data.users[0]['name'])
         email_input = self.browser.find_element_by_xpath('.//input[@placeholder="Email"]')
-        email_input.send_keys(email)
+        email_input.send_keys(user_data.users[0]['email'])
         pwd_input = self.browser.find_element_by_xpath('.//input[@placeholder="Password"]')
-        pwd_input.send_keys(password)
-        sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
-        sign_up_btn.click()
+        pwd_input.send_keys(user_data.users[0]['password'])
+        new_sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
+        new_sign_up_btn.click()
         time.sleep(2)
 
         try:
@@ -50,15 +46,14 @@ class TestConduit:
         sign_in_btn = self.browser.find_element_by_xpath('.//a[@href="#/login"]')
         sign_in_btn.click()
         email_input = self.browser.find_element_by_xpath('.//input[@placeholder="Email"]')
-        email_input.send_keys(email)
+        email_input.send_keys('.//input[@placeholder="Email"]')
         pwd_input = self.browser.find_element_by_xpath('.//input[@placeholder="Password"]')
-        pwd_input.send_keys(password)
-        sign_in_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
-        sign_in_btn.click()
+        pwd_input.send_keys('.//input[@placeholder="Password"]')
+        new_sign_in_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
+        new_sign_in_btn.click()
         time.sleep(2)
         try:
             settings_button = self.browser.find_element_by_xpath('.//a[@href="#/settings"]')
-            print(settings_button.text)
             assert settings_button.text == ' Settings'
         except AssertionError:
             print(f'\nA belépés sikertelen!')
@@ -73,6 +68,23 @@ class TestConduit:
             assert len(cookie_bar_content) == 0
         except AssertionError:
             print('A sütik elfogadása nem sikerült!')
+
+    def test_logout(self):
+        login(self.browser)
+        time.sleep(2)
+        counter = 0
+        log_out_button = self.browser.find_elements_by_xpath('//a[@class="nav-link"]')
+        for i in log_out_button:
+            if i.text == ' Log out':
+                break
+            counter += 1
+        log_out_button[counter].click()
+        time.sleep(2)
+        try:
+            sign_up_btn = self.browser.find_element_by_xpath('.//a[@href="#/register"]')
+            sign_up_btn.click()
+        except AssertionError:
+            print('A kijelentkezés nem sikerült!')
 
     def teardown(self):
         self.browser.quit()
