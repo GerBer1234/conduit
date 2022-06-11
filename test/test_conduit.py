@@ -43,14 +43,7 @@ class TestConduit:
             print(f'\nA regisztráció meghiúsult! A hiba oka: "{fail_msg.text}"!')
 
     def test_login(self):
-        sign_in_btn = self.browser.find_element_by_xpath('.//a[@href="#/login"]')
-        sign_in_btn.click()
-        email_input = self.browser.find_element_by_xpath('.//input[@placeholder="Email"]')
-        email_input.send_keys('.//input[@placeholder="Email"]')
-        pwd_input = self.browser.find_element_by_xpath('.//input[@placeholder="Password"]')
-        pwd_input.send_keys('.//input[@placeholder="Password"]')
-        new_sign_in_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
-        new_sign_in_btn.click()
+        login(self.browser)
         time.sleep(2)
         try:
             settings_button = self.browser.find_element_by_xpath('.//a[@href="#/settings"]')
