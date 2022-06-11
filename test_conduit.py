@@ -2,6 +2,9 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 import user_data
 import random
 
@@ -12,7 +15,6 @@ password = user_data.users[random_user]['password']
 
 
 class TestConduit:
-
     def setup(self):
         # az Options osztály egy példányát hozzuk létre
         browser_options = Options()
@@ -36,8 +38,9 @@ class TestConduit:
         sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         sign_up_btn.click()
         time.sleep(2)
-        return_message = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
+
         try:
+            return_message = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
             assert return_message.text == 'Welcome!'
         except AssertionError:
             fail_msg = self.browser.find_element_by_xpath('.//div[@class="swal-text"]')
@@ -55,9 +58,21 @@ class TestConduit:
         time.sleep(2)
         try:
             settings_button = self.browser.find_element_by_xpath('.//a[@href="#/settings"]')
-            assert settings_button.is_displayed()
-        except:
+            print(settings_button.text)
+            assert settings_button.text == ' Settings'
+        except AssertionError:
             print(f'\nA belépés sikertelen!')
 
-    # def teardown(self):
-    #     self.browser.quit()
+    def test_cookie(self):
+        cookie_accept_btn = self.browser.find_element_by_xpath('//button[@class="cookie__bar__buttons__button '
+                                                               'cookie__bar__buttons__button--accept"]')
+        cookie_accept_btn.click()
+        try:
+            time.sleep(2)
+            cookie_bar_content = self.browser.find_elements_by_id("cookie-policy-panel")
+            assert len(cookie_bar_content) == 0
+        except AssertionError:
+            print('A sütik elfogadása nem sikerült!')
+
+    def teardown(self):
+        self.browser.quit()
