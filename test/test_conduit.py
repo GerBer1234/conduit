@@ -2,11 +2,7 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 import user_data
-import random
 
 from important_functions import login
 
@@ -78,6 +74,20 @@ class TestConduit:
             sign_up_btn.click()
         except AssertionError:
             print('A kijelentkezés nem sikerült!')
+
+    def test_data(self):
+        login(self.browser)
+        time.sleep(2)
+        counter = 0
+        pagination_list = self.browser.find_elements_by_xpath('//a[@class="page-link"]')
+        for i in pagination_list:
+            i.click()
+            counter += 1
+            time.sleep(1)
+        try:
+            assert counter == len(pagination_list)
+        except AssertionError:
+            print('Sajnos valami hiba adódott!')
 
     def teardown(self):
         self.browser.quit()
