@@ -86,6 +86,7 @@ class TestConduit:
         textare.send_keys(user_data.bio_information)
         update = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         update.click()
+        time.sleep(1)
         try:
             update_msg = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
             assert update_msg == 'Update successful!'
