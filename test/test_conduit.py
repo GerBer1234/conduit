@@ -1,10 +1,9 @@
-import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import user_data
 
-from important_functions import login
+from important_functions import *
 
 
 class TestConduit:
@@ -19,18 +18,8 @@ class TestConduit:
         self.browser.get(URL)
 
     def test_registration(self):
-        sign_up_btn = self.browser.find_element_by_xpath('.//a[@href="#/register"]')
-        sign_up_btn.click()
-        username_input = self.browser.find_element_by_xpath('.//input[@placeholder="Username"]')
-        username_input.send_keys(user_data.users[0]['name'])
-        email_input = self.browser.find_element_by_xpath('.//input[@placeholder="Email"]')
-        email_input.send_keys(user_data.users[0]['email'])
-        pwd_input = self.browser.find_element_by_xpath('.//input[@placeholder="Password"]')
-        pwd_input.send_keys(user_data.users[0]['password'])
-        new_sign_up_btn = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
-        new_sign_up_btn.click()
+        registration(self.browser)
         time.sleep(2)
-
         try:
             return_message = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
             assert return_message.text == 'Welcome!'
@@ -88,6 +77,36 @@ class TestConduit:
             assert counter == len(pagination_list)
         except AssertionError:
             print('Sajnos valami hiba adódott!')
+
+    def test_new_data_to_profile(self):
+        find_menu_item(self.browser, ' Settings')
+        time.sleep(1)
+        textare = self.browser.find_element_by_xpath('//textarea[@placeholder="Short bio about you"]')
+        textare.clear()
+        textare.send_keys(user_data.bio_information)
+        update = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
+        update.click()
+        try:
+            update_msg = self.browser.find_element_by_xpath('.//div[@class="swal-title"]')
+            assert update_msg == 'Update successful!'
+        except AssertionError:
+            print('A bio kitöltése sikertelen.')
+
+    def test_listing_data(self):
+        login(self.browser)
+        time.sleep(1)
+        find_authors = self.browser.find_elements_by_xpath('//a[@class="author"]')
+        counter = 0
+        for i in find_authors:
+            if find_authors[0].text == i.text:
+                counter += 1
+        find_authors[0].click()
+        time.sleep(1)
+        try:
+            list_of_titles = self.browser.find_elements_by_xpath('//h1')
+            assert counter == len(list_of_titles)
+        except AssertionError:
+            print('Az adatok listázása nem volt megfelelő!')
 
     def teardown(self):
         self.browser.quit()
