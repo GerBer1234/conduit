@@ -34,3 +34,5 @@ new_article = [{
                'I assume that you’re still hung up on your ex. And, therefore, you also want to look fabulous.',
     'tags': 'single, scheudle'
 }]
+return_messages = ['Welcome!', 'Update successful!']
+menu_items = [' Settings', ' Log out']

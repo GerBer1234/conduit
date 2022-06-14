@@ -71,3 +71,11 @@ def find_author_articles(obj):
             i.click()
             break
     time.sleep(1)
+
+
+def is_file_empty(file_name):
+    with open(file_name, 'r', encoding='UTF-8') as f:
+        first_char = f.read(1)
+        if not first_char:
+            return True
+    return False
