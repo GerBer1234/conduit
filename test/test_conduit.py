@@ -8,11 +8,11 @@ from important_functions import *
 
 class TestConduit:
     def setup(self):
-        # # az Options osztály egy példányát hozzuk létre
-        # browser_options = Options()
-        # # a headless mód segítségével a felhasználói felület nélkül fut le a teszt
-        # browser_options.headless = True
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())  # , options=browser_options)
+        # az Options osztály egy példányát hozzuk létre
+        browser_options = Options()
+        # a headless mód segítségével a felhasználói felület nélkül fut le a teszt
+        browser_options.headless = True
+        self.browser = webdriver.Chrome(ChromeDriverManager().install(), options=browser_options)
         time.sleep(2)
         URL = main_url
         self.browser.get(URL)
