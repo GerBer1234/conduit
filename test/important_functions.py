@@ -31,7 +31,6 @@ def find_menu_item(obj, menu_point_name):
     time.sleep(2)
     counter = 0
     navbar_buttons = obj.find_elements_by_xpath('//a[@class="nav-link"]')
-    print(len(navbar_buttons))
     for i in navbar_buttons:
         if i.text == menu_point_name:
             break

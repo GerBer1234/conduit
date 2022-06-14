@@ -125,8 +125,6 @@ class TestConduit:
             list_of_new_article_fields[counter].send_keys(value)
             counter += 1
         time.sleep(1)
-        list_of_lengths_after = [len(input_title.get_attribute('value')), len(input_about.get_attribute('value')),
-                                 len(textarea.get_attribute('value')), len(input_tags.get_attribute('value'))]
         submit_btn = self.browser.find_element_by_xpath('//button[@type="submit"]')
         submit_btn.click()
         time.sleep(1)
@@ -134,6 +132,20 @@ class TestConduit:
             assert self.browser.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
         except AssertionError:
             print('Hiba, nem sikerült az adatfeltöltés!')
+
+    def test_modify_data(self):
+        find_menu_item(self.browser, ' Settings')
+        time.sleep(1)
+        input_profile_picture_url = self.browser.find_element_by_xpath('//input[@placeholder="URL of profile picture"]')
+        try:
+            if len(input_profile_picture_url.get_attribute('value')) != 0:
+                input_profile_picture_url.clear()
+                input_profile_picture_url.send_keys(profile_picture_url)
+                update = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
+                update.click()
+            assert input_profile_picture_url.get_attribute('value') == profile_picture_url
+        except AssertionError:
+            print('A profilkép URL címének módosítása nem sikerült!')
 
     def teardown(self):
         self.browser.quit()

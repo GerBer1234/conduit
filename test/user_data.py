@@ -23,3 +23,5 @@ new_article = {
                'have seen the ocean floor. Their armpits look like armpits. Mine look like evil inkblot tests...',
     'tags': 'hot, sweat, man, run'
 }
+
+profile_picture_url = 'https://uxwing.com/wp-content/themes/uxwing/download/12-peoples-avatars/user-profile.png'
