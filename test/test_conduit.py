@@ -81,9 +81,9 @@ class TestConduit:
     def test_new_data_to_profile(self):
         find_menu_item(self.browser, ' Settings')
         time.sleep(1)
-        textare = self.browser.find_element_by_xpath('//textarea[@placeholder="Short bio about you"]')
-        textare.clear()
-        textare.send_keys(user_data.bio_information)
+        textarea = self.browser.find_element_by_xpath('//textarea[@placeholder="Short bio about you"]')
+        textarea.clear()
+        textarea.send_keys(user_data.bio_information)
         update = self.browser.find_element_by_xpath('//button[@class="btn btn-lg btn-primary pull-xs-right"]')
         update.click()
         time.sleep(1)
@@ -108,6 +108,32 @@ class TestConduit:
             assert counter == len(list_of_titles)
         except AssertionError:
             print('Az adatok listázása nem volt megfelelő!')
+
+    def test_serial_data_upload(self):
+        login(self.browser)
+        time.sleep(1)
+        new_article_btn = self.browser.find_element_by_xpath('.//a[@href="#/editor"]')
+        new_article_btn.click()
+        time.sleep(1)
+        input_title = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"]')
+        input_about = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"]')
+        textarea = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
+        input_tags = self.browser.find_element_by_xpath('//input[@placeholder="Enter tags"]')
+        list_of_new_article_fields = [input_title, input_about, textarea, input_tags]
+        counter = 0
+        for key, value in new_article.items():
+            list_of_new_article_fields[counter].send_keys(value)
+            counter += 1
+        time.sleep(1)
+        list_of_lengths_after = [len(input_title.get_attribute('value')), len(input_about.get_attribute('value')),
+                                 len(textarea.get_attribute('value')), len(input_tags.get_attribute('value'))]
+        submit_btn = self.browser.find_element_by_xpath('//button[@type="submit"]')
+        submit_btn.click()
+        time.sleep(1)
+        try:
+            assert self.browser.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
+        except AssertionError:
+            print('Hiba, nem sikerült az adatfeltöltés!')
 
     def teardown(self):
         self.browser.quit()
