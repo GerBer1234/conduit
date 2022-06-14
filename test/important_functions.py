@@ -61,3 +61,13 @@ def data_upload(obj):
             assert obj.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
         except AssertionError:
             print('Hiba, nem sikerült az adatfeltöltés!')
+
+
+def find_author_articles(obj):
+    time.sleep(2)
+    find_authors = obj.find_elements_by_xpath('//a[@class="author"]')
+    for i in find_authors:
+        if users[0]['name'] == i.text:
+            i.click()
+            break
+    time.sleep(1)

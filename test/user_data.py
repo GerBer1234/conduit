@@ -1,8 +1,8 @@
 main_url = "http://localhost:1667/"
-users = [{'name': 'John Doe', 'email': 'jd@jd.com', 'password': 'J123456d'},
+users = [{'name': 'JohnDoe', 'email': 'jd@jd.com', 'password': 'J123456d'},
          {'name': 'Mary Jane', 'email': 'mj@mj.com', 'password': 'M123456j'},
          {'name': 'Ice Cube', 'email': 'ic@ic.com', 'password': 'I123456b'}]
-
+profile_picture_url = 'https://uxwing.com/wp-content/themes/uxwing/download/12-peoples-avatars/user-profile.png'
 bio_information = 'My name is John Doe and I am a Junior Web Developer for No Name Technologies. I am an ' \
                   'accomplished coder and programmer, and I enjoy using my skills to contribute to the exciting ' \
                   'technological advances that happen every day at No Name Tech.'
@@ -34,5 +34,3 @@ new_article = [{
                'I assume that you’re still hung up on your ex. And, therefore, you also want to look fabulous.',
     'tags': 'single, scheudle'
 }]
-
-profile_picture_url = 'https://uxwing.com/wp-content/themes/uxwing/download/12-peoples-avatars/user-profile.png'
