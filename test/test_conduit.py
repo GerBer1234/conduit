@@ -48,15 +48,7 @@ class TestConduit:
             print('A sütik elfogadása nem sikerült!')
 
     def test_logout(self):
-        login(self.browser)
-        time.sleep(2)
-        counter = 0
-        log_out_button = self.browser.find_elements_by_xpath('//a[@class="nav-link"]')
-        for i in log_out_button:
-            if i.text == ' Log out':
-                break
-            counter += 1
-        log_out_button[counter].click()
+        find_menu_item(self.browser, ' Log out')
         time.sleep(2)
         try:
             sign_up_btn = self.browser.find_element_by_xpath('.//a[@href="#/register"]')
@@ -112,26 +104,26 @@ class TestConduit:
     def test_serial_data_upload(self):
         login(self.browser)
         time.sleep(1)
-        new_article_btn = self.browser.find_element_by_xpath('.//a[@href="#/editor"]')
-        new_article_btn.click()
-        time.sleep(1)
-        input_title = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"]')
-        input_about = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"]')
-        textarea = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
-        input_tags = self.browser.find_element_by_xpath('//input[@placeholder="Enter tags"]')
-        list_of_new_article_fields = [input_title, input_about, textarea, input_tags]
-        counter = 0
-        for key, value in new_article.items():
-            list_of_new_article_fields[counter].send_keys(value)
-            counter += 1
-        time.sleep(1)
-        submit_btn = self.browser.find_element_by_xpath('//button[@type="submit"]')
-        submit_btn.click()
-        time.sleep(1)
-        try:
-            assert self.browser.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
-        except AssertionError:
-            print('Hiba, nem sikerült az adatfeltöltés!')
+        for i in range(0, len(new_article)):
+            new_article_btn = self.browser.find_element_by_xpath('.//a[@href="#/editor"]')
+            new_article_btn.click()
+            time.sleep(1)
+            input_title = self.browser.find_element_by_xpath('//input[@placeholder="Article Title"]')
+            input_about = self.browser.find_element_by_xpath('//input[@placeholder="What\'s this article about?"]')
+            textarea = self.browser.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
+            input_tags = self.browser.find_element_by_xpath('//input[@placeholder="Enter tags"]')
+            list_of_new_article_fields = [input_title, input_about, textarea, input_tags]
+            counter = 0
+            for key, value in new_article[i].items():
+                list_of_new_article_fields[counter].send_keys(value)
+                counter += 1
+            submit_btn = self.browser.find_element_by_xpath('//button[@type="submit"]')
+            submit_btn.click()
+            time.sleep(1)
+            try:
+                assert self.browser.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
+            except AssertionError:
+                print('Hiba, nem sikerült az adatfeltöltés!')
 
     def test_modify_data(self):
         find_menu_item(self.browser, ' Settings')

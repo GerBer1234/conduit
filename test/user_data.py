@@ -5,7 +5,7 @@ users = [{'name': 'John Doe', 'email': 'jd@jd.com', 'password': 'J123456d'},
 bio_information = 'My name is John Doe and I am a Junior Web Developer for No Name Technologies. I am an ' \
                   'accomplished coder and programmer, and I enjoy using my skills to contribute to the exciting ' \
                   'technological advances that happen every day at No Name Tech.'
-new_article = {
+new_article = [{
     'title': 'I Am a Man, and I Run Hot',
     'about': 'Running hot.',
     'article': 'Whatever the thermostat says, whatever the magical properties of your duvet, however naked I am at'
@@ -22,6 +22,16 @@ new_article = {
                'Regular people, the dry folk, claim to sweat. But they don’t know. They know a gentle rainfall. I'
                'have seen the ocean floor. Their armpits look like armpits. Mine look like evil inkblot tests...',
     'tags': 'hot, sweat, man, run'
-}
+}, {
+    'title': 'I’m Your Newly Single Friend, and Here Is Your Schedule for This Week',
+    'about': 'Being single',
+    'article': 'It’s such a thrill to be single again! I never, ever thought I’d be back out here, but I’m so stoked.'
+               ' Especially because you’re single, too—now we get to enjoy it together! Going out every night,'
+               ' meeting people . . . What do you mean my eyes are scary wide? They’ve always looked like this.\n'
+               'Monday: First, we’re getting haircuts. It’s important to post a photo looking fabulous right after'
+               'a breakup. I know that your last breakup was three years ago, but, since you don’t have a new partner,'
+               'I assume that you’re still hung up on your ex. And, therefore, you also want to look fabulous.',
+    'tags': 'single, scheudle'
+}]
 
 profile_picture_url = 'https://uxwing.com/wp-content/themes/uxwing/download/12-peoples-avatars/user-profile.png'
