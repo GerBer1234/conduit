@@ -37,3 +37,27 @@ def find_menu_item(obj, menu_point_name):
         counter += 1
     navbar_buttons[counter].click()
 
+
+def data_upload(obj):
+    login(obj)
+    time.sleep(1)
+    for i in range(0, len(new_article)):
+        new_article_btn = obj.find_element_by_xpath('.//a[@href="#/editor"]')
+        new_article_btn.click()
+        time.sleep(1)
+        input_title = obj.find_element_by_xpath('//input[@placeholder="Article Title"]')
+        input_about = obj.find_element_by_xpath('//input[@placeholder="What\'s this article about?"]')
+        textarea = obj.find_element_by_xpath('//textarea[@placeholder="Write your article (in markdown)"]')
+        input_tags = obj.find_element_by_xpath('//input[@placeholder="Enter tags"]')
+        list_of_new_article_fields = [input_title, input_about, textarea, input_tags]
+        counter = 0
+        for key, value in new_article[i].items():
+            list_of_new_article_fields[counter].send_keys(value)
+            counter += 1
+        submit_btn = obj.find_element_by_xpath('//button[@type="submit"]')
+        submit_btn.click()
+        time.sleep(1)
+        try:
+            assert obj.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
+        except AssertionError:
+            print('Hiba, nem sikerült az adatfeltöltés!')
