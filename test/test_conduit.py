@@ -57,7 +57,7 @@ class TestConduit:
         except AssertionError:
             print('A kijelentkezés nem sikerült!')
 
-    def test_go_through_a_multi-page_list(self):
+    def test_go_through_a_multi_page_list(self):
         login(self.browser)
         time.sleep(2)
         counter = 0
