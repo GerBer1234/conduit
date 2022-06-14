@@ -123,8 +123,8 @@ class TestConduit:
         home_btn = self.browser.find_element_by_xpath('.//a[@href = "#/"]')
         home_btn.click()
         find_author_articles(self.browser)
-        find_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
-        length_of_list = len(find_articles)
+        number_of_articles = self.browser.find_elements_by_xpath('//div[@class="article-preview"]')
+        length_of_list = len(number_of_articles)
         while length_of_list > 0:
             time.sleep(1)
             find_articles = self.browser.find_elements_by_xpath('//a[@class="preview-link"]')
