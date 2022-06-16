@@ -130,6 +130,7 @@ class TestConduit:
             assert input_profile_picture_url.get_attribute('value') == profile_picture_url
         except AssertionError:
             print('A profilkép URL címének módosítása nem sikerült!')
+
     # Adat vagy adatok törlése
     # A sikeres törlést az adott szerző bejegyzéseinek számával ellenőrzöm
     def test_delete_articles(self):
