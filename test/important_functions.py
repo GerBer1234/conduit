@@ -64,10 +64,7 @@ def data_upload(obj):
         submit_btn = obj.find_element_by_xpath('//button[@type="submit"]')
         submit_btn.click()
         time.sleep(1)
-        try:
-            assert obj.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
-        except AssertionError:
-            print('Hiba, nem sikerült az adatfeltöltés!')
+        assert obj.find_element_by_xpath('//i[@class="ion-edit"]').is_displayed()
 
 
 # Adott szerző bejegyzéseinek kigyűjtéséért felelős függvény
